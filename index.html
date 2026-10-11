@@ -3,27 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoldenGoose | Autonomous Trading Intelligence API</title>
-  <meta name="description" content="Empowering trading platforms with autonomous, Claude-powered quantitative trading signals via scalable APIs.">
+  <title>GoldenGoose AI | Autonomous Quantitative Trading Infrastructure</title>
+  <meta name="description" content="Next-generation autonomous quantitative trading intelligence powered by Anthropic's Claude AI. Real-time microsecond signal execution coupled with self-healing post-market parameter optimization.">
+  <meta name="keywords" content="Autonomous Trading, Claude AI, Quantitative Finance, Algorithmic Trading API, Market Regime Adaptation, Anthropic Startups">
+  <meta property="og:title" content="GoldenGoose AI | Autonomous Quantitative Trading Infrastructure">
+  <meta property="og:description" content="Sub-50ms statistical arbitrage & VWAP reclaim signals synchronized with Claude-powered autonomous parameter optimization.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon SVG Data URI -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #07090e;
-      --card-bg: rgba(18, 24, 38, 0.7);
+      --bg-surface: #0c101a;
+      --card-bg: rgba(16, 22, 36, 0.75);
+      --card-hover: rgba(23, 31, 51, 0.9);
       --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(245, 158, 11, 0.35);
+      
       --primary: #f59e0b;
+      --primary-light: #fbbf24;
+      --primary-dark: #d97706;
       --primary-glow: rgba(245, 158, 11, 0.25);
+      
+      --claude: #d97706;
+      --claude-glow: rgba(217, 119, 6, 0.3);
+      --claude-pill: rgba(217, 119, 6, 0.15);
+
       --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.25);
       --cyan: #06b6d4;
+      --cyan-glow: rgba(6, 182, 212, 0.25);
+      --purple: #8b5cf6;
+      --danger: #ef4444;
+
       --text: #f3f4f6;
       --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Outfit', sans-serif;
       --mono: 'JetBrains Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg);
@@ -32,226 +62,1193 @@
       line-height: 1.6;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+        radial-gradient(circle at 12% 15%, rgba(245, 158, 11, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 88% 25%, rgba(6, 182, 212, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 65%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
       background-attachment: fixed;
     }
 
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    /* Selection & Scrollbar */
+    ::selection { background: var(--primary); color: #000; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #07090e; }
+    ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #374151; }
 
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    /* Top Announcement Bar */
+    .top-banner {
+      background: linear-gradient(90deg, rgba(217, 119, 6, 0.25), rgba(6, 182, 212, 0.2), rgba(217, 119, 6, 0.25));
+      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+      padding: 9px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #fef3c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .top-banner .badge {
+      background: var(--primary);
+      color: #07090e;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Sticky Navigation */
     header {
-      padding: 24px 0;
+      padding: 18px 0;
       border-bottom: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       background: rgba(7, 9, 14, 0.85);
     }
-
     .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-
+    
     .brand {
-      display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: #fff; text-decoration: none;
+      display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; color: #fff; text-decoration: none; font-family: var(--font-heading);
     }
-
     .brand-badge {
-      width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 0 16px var(--primary-glow);
+      width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .brand span.sub {
+      font-size: 0.75rem; font-weight: 600; color: var(--primary); background: rgba(245, 158, 11, 0.12); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.25); text-transform: uppercase; letter-spacing: 0.05em; margin-left: 4px;
     }
 
     .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
     .nav-link:hover { color: #fff; }
 
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
     .btn-apply {
-      padding: 8px 16px; border-radius: 8px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s;
+      padding: 9px 18px; border-radius: 8px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--primary-light); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
     }
-    .btn-apply:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary-glow); }
+    .btn-apply:hover { background: var(--primary); color: #07090e; box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-1px); }
 
-    .hero { padding: 96px 0 64px; text-align: center; position: relative; }
+    .btn-ghost {
+      padding: 9px 16px; border-radius: 8px; background: transparent; border: 1px solid var(--card-border); color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.04); }
 
+    /* Hero Section */
+    .hero { padding: 90px 0 60px; text-align: center; position: relative; }
+    
     .badge-pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em;
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; background: rgba(217, 119, 6, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--primary-light); font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.06em;
     }
-    .badge-pill span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+    .badge-pill span.pulse {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulseAnim 2s infinite;
+    }
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
 
     .hero-title {
-      font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 24px; background: linear-gradient(180deg, #ffffff 30%, #9ca3af 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-family: var(--font-heading);
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #ffffff 40%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-title .gradient-highlight {
+      background: linear-gradient(135deg, #f59e0b 20%, #ec4899 70%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hero-desc { font-size: 1.25rem; color: var(--text-muted); max-width: 720px; margin: 0 auto 40px; font-weight: 400; }
-    .hero-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .hero-desc {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
 
     .btn-primary {
-      padding: 14px 28px; border-radius: 10px; background: var(--primary); color: #0b0f19; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px var(--primary-glow);
+      padding: 15px 32px; border-radius: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #07090e; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.25s; box-shadow: 0 4px 24px var(--primary-glow); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(245, 158, 11, 0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245, 158, 11, 0.45); }
 
+    .btn-secondary {
+      padding: 15px 28px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: #fff; font-weight: 600; font-size: 1rem; text-decoration: none; transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+    /* Startup Highlights Ribbon */
+    .startup-trust-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding: 18px 24px;
+      border-radius: 14px;
+      background: rgba(18, 24, 38, 0.5);
+      border: 1px solid var(--card-border);
+      max-width: 980px;
+      margin: 0 auto 60px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+    .trust-item strong { color: #fff; font-weight: 600; }
+    .trust-icon { color: var(--primary); font-size: 1.1rem; }
+
+    /* Live Metrics Bar */
     .metrics-bar {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 64px 0; padding: 24px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(16px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 0 0 64px;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
     }
-    .metric-item { text-align: center; padding: 12px; }
-    .metric-value { font-family: var(--mono); font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .metric-item { text-align: center; padding: 14px; border-right: 1px solid var(--card-border); }
+    .metric-item:last-child { border-right: none; }
+    .metric-value { font-family: var(--mono); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .metric-value.highlight-gold { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+    .metric-value.highlight-green { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
+    .metric-value.highlight-cyan { color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+    .metric-label { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
 
-    .section { padding: 72px 0; }
-    .section-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; text-align: center; }
-    .section-sub { color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 48px; font-size: 1.05rem; }
+    /* Sections Shared Styles */
+    .section { padding: 84px 0; position: relative; }
+    .section-tag {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; text-align: center; line-height: 1.25; }
+    .section-sub { color: var(--text-muted); text-align: center; max-width: 680px; margin: 0 auto 52px; font-size: 1.1rem; line-height: 1.6; }
 
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-    .feature-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 32px; backdrop-filter: blur(12px); transition: all 0.2s; position: relative; }
-    .feature-card:hover { border-color: rgba(245, 158, 11, 0.4); transform: translateY(-4px); }
-    .feature-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; color: var(--primary); }
-    .feature-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    /* Problem / Value Proposition Cards */
+    .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .value-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 36px 30px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: transparent;
+      transition: background 0.25s ease;
+    }
+    .value-card:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+    }
+    .value-card:hover::before { background: linear-gradient(90deg, var(--primary), var(--cyan)); }
+    .value-icon {
+      width: 52px; height: 52px; border-radius: 14px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 22px; color: var(--primary);
+    }
+    .value-card h3 { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .value-card p { color: var(--text-muted); font-size: 0.98rem; line-height: 1.65; }
 
-    .arch-box {
-      background: #0d121f; border: 1px solid var(--card-border); border-radius: 16px; padding: 32px; font-family: var(--mono); font-size: 0.9rem; color: #93c5fd; line-height: 1.8; overflow-x: auto; margin-top: 32px;
+    /* Interactive Architecture Canvas */
+    .arch-container {
+      background: rgba(11, 15, 25, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    
+    .arch-tabs {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 18px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .arch-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .arch-tab-btn.active {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: var(--primary-light);
+    }
+    .arch-tab-btn:hover:not(.active) { color: #fff; background: rgba(255, 255, 255, 0.05); }
+
+    /* Interactive Visual Diagram (Flowchart Nodes) */
+    .diagram-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .diagram-col { display: flex; flex-direction: column; gap: 16px; }
+    .col-header {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+
+    .arch-node {
+      background: #101625;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.25s;
+      cursor: pointer;
+      position: relative;
+    }
+    .arch-node:hover, .arch-node.active-node {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
+    }
+    .arch-node .node-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .arch-node.claude-node {
+      border-color: rgba(217, 119, 6, 0.4);
+      background: linear-gradient(180deg, rgba(217, 119, 6, 0.12) 0%, #101625 100%);
+    }
+    .arch-node.claude-node .node-tag {
+      color: var(--primary-light);
+      background: rgba(245, 158, 11, 0.15);
+    }
+    .arch-node h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .arch-node p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; }
+    .arch-node .node-meta {
+      display: flex; justify-content: space-between; margin-top: 12px; font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;
     }
 
-    .claude-box {
-      border: 1px solid rgba(245, 158, 11, 0.3); background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, rgba(18, 24, 38, 0.6) 100%); border-radius: 20px; padding: 48px; margin-top: 48px; text-align: left;
+    /* Node Inspector Panel */
+    .node-inspector {
+      background: #090d16;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
     }
-    .claude-box h3 { font-size: 1.75rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-    .claude-box p { color: #d1d5db; font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; }
+    .inspector-badge {
+      width: 48px; height: 48px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; color: var(--primary);
+    }
+    .inspector-content h4 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .inspector-content p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 12px; }
+    .inspector-specs { display: flex; gap: 20px; flex-wrap: wrap; }
+    .spec-item { font-family: var(--mono); font-size: 0.8rem; background: rgba(255,255,255,0.04); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); }
+    .spec-item span { color: var(--primary); font-weight: 600; }
 
+    /* Claude Core Showcase */
+    .claude-feature-box {
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      background: radial-gradient(circle at 10% 10%, rgba(217, 119, 6, 0.1) 0%, rgba(16, 22, 36, 0.75) 60%);
+      border-radius: 24px;
+      padding: 56px 44px;
+      backdrop-filter: blur(16px);
+      margin-top: 32px;
+      position: relative;
+    }
+    .claude-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .claude-text h3 { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 18px; line-height: 1.25; }
+    .claude-text p { color: #d1d5db; font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px; }
+    .claude-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .claude-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: #e5e7eb; }
+    .claude-list li svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+    /* Simulated Claude Output Terminal */
+    .claude-terminal {
+      background: #090c14;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    .terminal-header {
+      background: #111622;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .terminal-dots { display: flex; gap: 6px; }
+    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .terminal-title { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .terminal-body { padding: 20px; color: #d1d5db; line-height: 1.65; max-height: 380px; overflow-y: auto; }
+    .term-line-dim { color: #6b7280; }
+    .term-line-green { color: #34d399; }
+    .term-line-gold { color: #fbbf24; }
+    .term-line-cyan { color: #38bdf8; }
+
+    /* Live Interactive Signal Simulator */
+    .simulator-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin: 40px 0;
+    }
+    .sim-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+    }
+    .sim-title { display: flex; align-items: center; gap: 12px; }
+    .sim-title h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #fff; }
+    .sim-status {
+      display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.82rem; background: rgba(16, 185, 129, 0.12); color: var(--accent); padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .sim-status span.led { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+    
+    .ticker-table-wrapper { overflow-x: auto; }
+    .ticker-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.88rem; }
+    .ticker-table th { text-align: left; padding: 12px 16px; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--card-border); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; }
+    .ticker-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); color: #e5e7eb; }
+    .ticker-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+    .badge-signal-buy { background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 4px 10px; border-radius: 6px; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-signal-watch { background: rgba(245, 158, 11, 0.15); color: #fbbf24; padding: 4px 10px; border-radius: 6px; font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-signal-exit { background: rgba(239, 68, 68, 0.15); color: #f87171; padding: 4px 10px; border-radius: 6px; font-weight: 700; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* Interactive API Docs & Code Sandbox */
+    .api-sandbox {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .api-nav-tabs {
+      display: flex;
+      background: #111726;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0 16px;
+      overflow-x: auto;
+    }
+    .api-tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      padding: 16px 20px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .api-tab-btn.active {
+      color: var(--primary-light);
+      border-bottom-color: var(--primary);
+    }
+    .api-tab-btn:hover:not(.active) { color: #fff; }
+
+    .code-preview {
+      padding: 24px;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #e5e7eb;
+      overflow-x: auto;
+      background: #070a12;
+    }
+
+    /* Startup Mission & Why Anthropic Section */
+    .pitch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
+    .pitch-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 36px 28px;
+      position: relative;
+    }
+    .pitch-card.highlight {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(16, 22, 36, 0.8) 100%);
+    }
+    .pitch-card h4 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .pitch-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+
+    /* CTA Card */
     .cta-card {
-      text-align: center; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 24px; padding: 64px 32px; margin: 64px 0;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.15) 0%, rgba(16, 22, 36, 0.9) 70%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 28px;
+      padding: 72px 32px;
+      margin: 80px 0 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
-    .cta-card h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
-    .cta-card p { color: var(--text-muted); font-size: 1.1rem; max-width: 580px; margin: 0 auto 32px; }
+    .cta-card h2 { font-family: var(--font-heading); font-size: 2.8rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
+    .cta-card p { color: var(--text-muted); font-size: 1.15rem; max-width: 640px; margin: 0 auto 36px; line-height: 1.6; }
 
-    footer { border-top: 1px solid var(--card-border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    /* Interactive Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 6, 12, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-card {
+      background: #0e1422;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 580px;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.active .modal-card { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+    .modal-title { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .modal-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; }
+    
+    .form-group { margin-bottom: 18px; text-align: left; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #e5e7eb; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: #080b12;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
+    /* Modal Success State */
+    .modal-success-box {
+      text-align: center;
+      padding: 20px 0;
+      display: none;
+    }
+    .modal-success-box.active { display: block; }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid var(--accent); color: var(--accent); font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+    }
+    .api-key-preview {
+      background: #07090f;
+      border: 1px dashed rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--primary-light);
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 60px 0 40px;
+      background: #05070b;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { max-width: 340px; margin-top: 14px; font-size: 0.88rem; line-height: 1.6; color: var(--text-dim); }
+    .footer-col h5 { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; font-size: 0.88rem; cursor: pointer; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .diagram-flow { grid-template-columns: 1fr 1fr; }
+      .claude-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 768px) {
-      .hero-title { font-size: 2.5rem; }
-      .metrics-bar { grid-template-columns: 1fr 1fr; }
-      .claude-box { padding: 24px; }
+      .hero-title { font-size: 2.6rem; }
+      .hero-desc { font-size: 1.05rem; }
+      .diagram-flow { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .metrics-bar { grid-template-columns: 1fr; }
+      .metric-item { border-right: none; border-bottom: 1px solid var(--card-border); }
+      .metric-item:last-child { border-bottom: none; }
+      .claude-feature-box { padding: 32px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Top Announcement Bar for Anthropic Reviewers -->
+  <div class="top-banner" id="top-announcement">
+    <span class="badge">Anthropic Claude Startups</span>
+    <span>Candidate Cohort Application: GoldenGoose Autonomous Quant Intelligence &amp; Dynamic API Platform</span>
+    <a href="#claude-edge" style="color: #fff; text-decoration: underline; font-weight: 600; margin-left: 8px;">Explore Claude Integration &rarr;</a>
+  </div>
+
+  <!-- Header / Navigation -->
   <header>
     <div class="container nav-wrapper">
       <a href="#" class="brand">
         <div class="brand-badge">🪿</div>
-        <span>GoldenGoose API</span>
+        <span>GoldenGoose</span>
+        <span class="sub">Quant AI</span>
       </a>
-      <div class="nav-links">
-        <a href="#api" class="nav-link">Signals API</a>
-        <a href="#claude" class="nav-link">Claude AI Edge</a>
-        <a href="#contact" class="nav-link">Contact Sales</a>
-        <a href="#contact" class="btn-apply">Request API Key</a>
+      
+      <nav class="nav-links">
+        <a href="#overview" class="nav-link">Overview</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#claude-edge" class="nav-link">Claude AI Edge</a>
+        <a href="#live-demo" class="nav-link">Live Signals</a>
+        <a href="#api-docs" class="nav-link">API &amp; SDK</a>
+        <a href="#company" class="nav-link">Why GoldenGoose</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-ghost" onclick="openDocsModal()">Docs</button>
+        <button class="btn-apply" onclick="openModal('beta')">
+          <span>Request API Key</span> &rarr;
+        </button>
       </div>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero container">
+  <section class="hero container" id="overview">
     <div class="badge-pill">
-      <span></span> B2B Quant Intelligence &amp; Trade Signals
+      <span class="pulse"></span> B2B Quant Intelligence &amp; Autonomous LLM Feedback
     </div>
+    
     <h1 class="hero-title">
-      Autonomous Trade Timing<br>Delivered via API
+      Autonomous Trade Timing<br>
+      <span class="gradient-highlight">Governed by Claude AI</span>
     </h1>
+    
     <p class="hero-desc">
-      We empower trading platforms, fintech apps, and retail investors with institutional-grade trading signals. Our engine dynamically adapts to market regimes using Claude AI, delivering precision entry and exit timings in real-time.
+      We build institutional-grade quantitative trading infrastructure for modern fintechs, brokerages, and prop desks. 
+      Combining <strong>sub-50ms statistical micro-reversion execution</strong> with <strong>Anthropic Claude's autonomous post-market reasoning</strong> to eliminate algorithmic market drift.
     </p>
+    
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Request API Documentation</a>
+      <button class="btn-primary" onclick="openModal('beta')">
+        <span>🚀 Join Private Beta</span>
+      </button>
+      <a href="#architecture" class="btn-secondary">
+        <span>📐 View Architecture</span>
+      </a>
+      <a href="#live-demo" class="btn-secondary">
+        <span>⚡ Live Signal Console</span>
+      </a>
     </div>
 
-    <!-- Metrics -->
+    <!-- Startup Proof & Trust Ribbon -->
+    <div class="startup-trust-banner">
+      <div class="trust-item">
+        <span class="trust-icon">✦</span>
+        <span>Empowering <strong>Fintechs &amp; Prop Desks</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⚙</span>
+        <span>Built with <strong>Claude 3.5 Sonnet / Opus</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🛡</span>
+        <span>Strict <strong>Deterministic Guardrails</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <span>Zero-Overnight <strong>Pure Intraday Risk</strong></span>
+      </div>
+    </div>
+
+    <!-- Live Performance Metrics -->
     <div class="metrics-bar">
       <div class="metric-item">
-        <div class="metric-value">REST / WSS</div>
-        <div class="metric-label">Integration protocols</div>
+        <div class="metric-value highlight-gold">&ge; 1.60x</div>
+        <div class="metric-label">Target Payoff Ratio (Win/Loss)</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">Sub-50ms</div>
-        <div class="metric-label">Signal Delivery Latency</div>
+        <div class="metric-value highlight-green">&lt; 50ms</div>
+        <div class="metric-label">Signal Dissemination Latency</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">100%</div>
-        <div class="metric-label">Automated AI Feedback Loop</div>
+        <div class="metric-value highlight-cyan">100%</div>
+        <div class="metric-label">Post-Market Self-Healing Loop</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">Dynamic</div>
-        <div class="metric-label">Market Regime Adaptation</div>
+        <div class="metric-value">3-Min</div>
+        <div class="metric-label">VWAP Reclaim Micro-Candle Resolution</div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="api" class="section container">
-    <h2 class="section-title">The Engine Behind the API</h2>
+  <!-- Problem / Solution Section -->
+  <section class="section container">
+    <span class="section-tag">The Core Problem</span>
+    <h2 class="section-title">The Market Regime Drift Dilemma</h2>
     <p class="section-sub">
-      A robust multi-process architecture decoupling raw market data ingestion, tactical execution, and post-market quantitative optimization.
+      Traditional quantitative trading strategies decay within 90 days. Static rules overfit historical data, while black-box deep learning hallucinates under non-stationary macro shifts.
     </p>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Real-time Signal Generation</h3>
-        <p>Our ZeroMQ-backed core processes tick data and generates actionable micro-candle (3-min) signals. Consume these effortlessly via our secure WebSocket API for your client dashboards.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">📉</div>
+        <h3>The Algorithmic Decay Trap</h3>
+        <p>
+          Fixed indicators (RSI, Bollinger, Static Moving Averages) fail when volatility regimes shift from trending to range-bound. Retuning requires manual quant intervention and weeks of lag.
+        </p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Regime-Aware Thresholds</h3>
-        <p>Instead of static logic, our API dynamically adjusts risk parameters, stop-loss grids, and profit targets based on intraday market regimes (Bullish, Neutral, Bearish) computed hourly.</p>
+      <div class="value-card">
+        <div class="value-icon">🧠</div>
+        <h3>Claude as Autonomous Quant Officer</h3>
+        <p>
+          Every trading day at market close, GoldenGoose synthesizes execution slips, attribution grids, and VWAP variance. Claude diagnoses causal factors and autonomously updates the Single Source of Truth (SSOT).
+        </p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <h3>Plug-and-Play Intelligence</h3>
-        <p>Enhance your existing financial products. Provide your retail users with enterprise-grade "Buy/Sell" indicators without building a complex quant infrastructure in-house.</p>
-      </div>
-    </div>
-
-    <!-- Architectural Overview -->
-    <div class="arch-box">
-      [Market Data Feed] → [GoldenGoose Signal Engine]
-                                    ↓
-      [Risk & Portfolio Evaluator] → [REST/WSS API Gateway]
-                                    ↓
-                       [Your Trading Platform / App] → [Retail Users]
-                                    ↓
-      [Claude AI: End-of-Day Review & Auto-Tuning Loop]
-    </div>
-  </section>
-
-  <!-- Claude AI Integration Section -->
-  <section id="claude" class="section container">
-    <div class="claude-box">
-      <h3>Powered by Anthropic's Claude</h3>
-      <p>
-        Traditional signal providers fail because they rely on overfitted, rigid parameters. GoldenGoose utilizes <strong>Claude</strong> as a reasoning agent within our post-market pipeline to overcome market drift.
-      </p>
-      <p>
-        Every trading day after market close, our system compiles execution logs, feature attribution matrices, and slip data. Claude acts as a Quantitative Analyst—analyzing these behavioral patterns against macroeconomic context to automatically rewrite and optimize our hyperparameter state (Param SSOT) for the next trading session. This self-healing loop guarantees that the APIs you consume are always calibrated to the current market pulse.
-      </p>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
-        <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-family: var(--mono); color: var(--primary);">Claude Startups Applicant</span>
-        <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-family: var(--mono); color: var(--accent);">B2B Quant APIs</span>
-        <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-family: var(--mono); color: var(--cyan);">Autonomous LLM Loop</span>
+      <div class="value-card">
+        <div class="value-icon">🔌</div>
+        <h3>Turnkey B2B API Distribution</h3>
+        <p>
+          Brokers and consumer wealthtech apps can embed high-alpha Buy/Sell timings directly into their user interfaces via simple REST endpoints and real-time WebSocket feeds.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Contact / Application CTA -->
-  <section id="contact" class="container">
+  <!-- Interactive System Architecture Section (시스템 구성도) -->
+  <section class="section container" id="architecture">
+    <span class="section-tag">System Architecture</span>
+    <h2 class="section-title">End-to-End Autonomous Quant Architecture</h2>
+    <p class="section-sub">
+      A decoupled, multi-process distributed architecture separating high-speed intraday execution from intelligent post-market LLM optimization.
+    </p>
+
+    <div class="arch-container">
+      <!-- Tabs for Architecture Views -->
+      <div class="arch-tabs">
+        <button class="arch-tab-btn active" onclick="switchArchTab('diagram')">Visual Architecture Flow</button>
+        <button class="arch-tab-btn" onclick="switchArchTab('pipeline')">Intraday Execution Sequence</button>
+        <button class="arch-tab-btn" onclick="switchArchTab('eod')">Claude Post-Market Loop</button>
+      </div>
+
+      <!-- Tab 1: Visual Interactive Diagram -->
+      <div id="arch-view-diagram">
+        <div class="diagram-flow">
+          <!-- Column 1: Market Ingestion -->
+          <div class="diagram-col">
+            <div class="col-header"><span class="dot"></span> 01. Ingestion Layer</div>
+            
+            <div class="arch-node active-node" onclick="inspectNode('broker')">
+              <span class="node-tag">KRX / Global Tick</span>
+              <h4>Broker Feed Gateway</h4>
+              <p>LS OpenAPI / Real-time Tick Streams &amp; Orderbook Ingestion via C++ / ActiveX &amp; ZMQ IPC.</p>
+              <div class="node-meta"><span>Protocol</span><span>Raw Tick / ZMQ</span></div>
+            </div>
+
+            <div class="arch-node" onclick="inspectNode('picker')">
+              <span class="node-tag">D-1 Compression</span>
+              <h4>Stock Picking Engine</h4>
+              <p>Screens universe for volatility compression, energy surge, and liquidity gates.</p>
+              <div class="node-meta"><span>Latency</span><span>Pre-Market Batch</span></div>
+            </div>
+          </div>
+
+          <!-- Column 2: Intraday Decision Engine -->
+          <div class="diagram-col">
+            <div class="col-header"><span class="dot"></span> 02. Execution Engine</div>
+
+            <div class="arch-node" onclick="inspectNode('reclaim')">
+              <span class="node-tag">64-bit Core</span>
+              <h4>VWAP Reclaim Core</h4>
+              <p>3-minute bar resampling. Triggers on mean-reversion reclaims above VWAP &minus;k&sigma; threshold.</p>
+              <div class="node-meta"><span>Frequency</span><span>3-Min Microbars</span></div>
+            </div>
+
+            <div class="arch-node" onclick="inspectNode('regime')">
+              <span class="node-tag">Intraday Overlay</span>
+              <h4>Regime Classifier</h4>
+              <p>Continuously categorizes market pulse (Bull / Range / Bear) every 30 minutes to dynamically recalibrate bands.</p>
+              <div class="node-meta"><span>Update Cycle</span><span>Hourly Overlay</span></div>
+            </div>
+          </div>
+
+          <!-- Column 3: Risk & Distribution -->
+          <div class="diagram-col">
+            <div class="col-header"><span class="dot"></span> 03. Risk &amp; B2B API</div>
+
+            <div class="arch-node" onclick="inspectNode('risk')">
+              <span class="node-tag">Capital Guard</span>
+              <h4>Portfolio Limit Sizer</h4>
+              <p>Strict slot allocations, Chandelier ATR trailing stops, and zero-overnight mandatory time cuts.</p>
+              <div class="node-meta"><span>Risk Rule</span><span>Payoff &ge; 1.6x</span></div>
+            </div>
+
+            <div class="arch-node" onclick="inspectNode('api_gateway')">
+              <span class="node-tag">B2B Streaming</span>
+              <h4>REST &amp; WSS Gateway</h4>
+              <p>Ultra-fast signal feeds and webhook dispatches powering consumer trading apps and desks.</p>
+              <div class="node-meta"><span>SLA</span><span>99.99% Uptime</span></div>
+            </div>
+          </div>
+
+          <!-- Column 4: Claude Post-Market Brain -->
+          <div class="diagram-col">
+            <div class="col-header"><span class="dot"></span> 04. Claude AI Brain</div>
+
+            <div class="arch-node claude-node" onclick="inspectNode('claude_review')">
+              <span class="node-tag">Anthropic Reasoning</span>
+              <h4>Claude EOD Reviewer</h4>
+              <p>Digests daily trades, slippage deltas, and feature logs to identify regime drifts.</p>
+              <div class="node-meta"><span>LLM</span><span>Claude 3.5 Sonnet</span></div>
+            </div>
+
+            <div class="arch-node claude-node" onclick="inspectNode('auto_tune')">
+              <span class="node-tag">Self-Healing</span>
+              <h4>SSOT Auto-Tuner</h4>
+              <p>Generates bounded, unit-tested parameter patches to ai_parameters.json before market open.</p>
+              <div class="node-meta"><span>Harness</span><span>Deterministic Pytest</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node Inspector Bar -->
+        <div class="node-inspector" id="node-inspector">
+          <div class="inspector-badge" id="insp-icon">🪿</div>
+          <div class="inspector-content">
+            <h4 id="insp-title">Select any architecture module above to inspect details</h4>
+            <p id="insp-desc">Click on any component card in the pipeline above to see its technical specifications, data schemas, and mathematical roles in the GoldenGoose trading system.</p>
+            <div class="inspector-specs" id="insp-specs">
+              <div class="spec-item">Architecture: <span>Decoupled Micro-Process</span></div>
+              <div class="spec-item">IPC: <span>ZeroMQ Low-Latency IPC</span></div>
+              <div class="spec-item">Reasoning Engine: <span>Anthropic Claude API</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Execution Sequence (Initially Hidden) -->
+      <div id="arch-view-pipeline" style="display: none;">
+        <div style="background: #090d16; padding: 24px; border-radius: 16px; font-family: var(--mono); font-size: 0.88rem; line-height: 1.8; color: #93c5fd; overflow-x: auto;">
+          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 12px;">// INTRADAY REAL-TIME EXECUTION SEQUENCE</div>
+          09:00:00 [Market Open] &rarr; Ingestion of KRX / Global raw tick feed over ZeroMQ<br>
+          09:03:00 [3-Min Bar Resample] &rarr; Compute Dynamic VWAP and &minus;k&sigma; lower envelope band<br>
+          09:03:05 [Signal Gate] &rarr; Stock touches lower band &amp; rebounds above: VWAP_RECLAIM triggered<br>
+          09:03:06 [Risk Check] &rarr; PortfolioLimitService verifies slot capacity, exposure ceiling &amp; upside room &ge; min_pct<br>
+          09:03:07 [Order Dispatch] &rarr; Limit order placed via Broker Gateway; Signal broadcast to B2B WebSocket clients<br>
+          10:00:00 [Trailing Chandelier] &rarr; High water mark tracked; ATR stop armed only once profit exceeds threshold<br>
+          15:15:00 [Time Cut Cutoff] &rarr; All open intraday positions flattened (Zero overnight gap risk)
+        </div>
+      </div>
+
+      <!-- Tab 3: Claude EOD Loop (Initially Hidden) -->
+      <div id="arch-view-eod" style="display: none;">
+        <div style="background: #090d16; padding: 24px; border-radius: 16px; font-family: var(--mono); font-size: 0.88rem; line-height: 1.8; color: #34d399; overflow-x: auto;">
+          <div style="color: #fbbf24; font-weight: 700; margin-bottom: 12px;">// POST-MARKET CLAUDE SELF-HEALING OPTIMIZATION CYCLE</div>
+          15:35:00 [Feature Extraction] &rarr; daily_review.py extracts trade slips, reclaim grids &amp; regime matrices<br>
+          15:40:00 [Historical Context] &rarr; Aggregate trailing N-day rolling execution window (records/daily_features.jsonl)<br>
+          15:45:00 [Claude Reasoning Prompt] &rarr; Feed structured logs &amp; macro context to Claude 3.5 Sonnet / Opus<br>
+          15:46:30 [Quant Evaluation] &rarr; Claude detects regime shifts (e.g. high volatility false-breakouts)<br>
+          15:47:00 [Bounded Proposal] &rarr; Claude outputs tuned hyperparameters within strict PARAM_SCHEMA clamp<br>
+          15:48:00 [Deterministic Harness] &rarr; Run pre-commit pytest gates; atomize write to ai_parameters.json<br>
+          08:30:00 [Next Day Open] &rarr; Engine loads fresh calibrated state ready for live trading
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claude AI Deep Dive Section -->
+  <section class="section container" id="claude-edge">
+    <span class="section-tag">Anthropic Claude Integration</span>
+    <h2 class="section-title">The Claude AI Quantitative Advantage</h2>
+    <p class="section-sub">
+      Why we chose Anthropic Claude as the foundational intelligence engine behind our trading architecture.
+    </p>
+
+    <div class="claude-feature-box">
+      <div class="claude-grid">
+        <div class="claude-text">
+          <h3>Beyond Static Backtesting:<br>Reasoning-Driven Calibration</h3>
+          <p>
+            Standard quant models rely on statistical regression that inevitably overfits noisy historical data. 
+            At GoldenGoose, we harness Claude's frontier reasoning capability to act as an autonomous <strong>Chief Quantitative Officer</strong>.
+          </p>
+
+          <ul class="claude-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Causal Attribution over Pattern Matching:</strong> Claude analyzes <em>why</em> specific trades slipped (e.g., sector rotation vs. liquidity exhaustion), avoiding naive over-parameterization.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Deterministic Mathematical Bounds:</strong> Claude’s adjustments are strictly bounded by JSON schemas and verified via automated test harnesses before hitting production.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Rapid Regime Adaptation:</strong> When macro shocks hit, Claude immediately widens entry envelopes and adjusts stop grids without waiting for months of training lag.</span>
+            </li>
+          </ul>
+
+          <button class="btn-primary" onclick="simulateClaudeRun()">
+            <span>✨ Simulate Claude Post-Market Audit</span>
+          </button>
+        </div>
+
+        <!-- Simulated Claude Reasoning Console -->
+        <div class="claude-terminal">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <div class="terminal-dot dot-red"></div>
+              <div class="terminal-dot dot-yellow"></div>
+              <div class="terminal-dot dot-green"></div>
+            </div>
+            <div class="terminal-title">Claude 3.5 Sonnet &bull; EOD Quant Audit</div>
+          </div>
+          <div class="terminal-body" id="claude-log-window">
+            <span class="term-line-dim">[15:35:12] Ingesting daily_features.jsonl (46 executions, 3 sessions)...</span><br>
+            <span class="term-line-cyan">&gt; Analyzing Replay-to-Actual Discrepancy: &Delta; = 0.11%p (Passing: &le;0.30%p)</span><br>
+            <span class="term-line-dim">[15:35:14] Examining Regime Distribution: 62% Range-bound, 38% Bear drift</span><br>
+            <span class="term-line-gold">&gt; Observation: Tech sector volatility increased after 13:00. 3-min micro-reclaims exhibited premature entry slippage.</span><br>
+            <br>
+            <span class="term-line-green">&#10003; Causal Synthesis by Claude:</span><br>
+            "Elevated intra-candle noise requires widening the VWAP entry envelope to prevent chasing shallow fake-outs. We maintain the 1.6x payoff threshold while shifting entry band sigma from 1.95 to 2.10."<br>
+            <br>
+            <span class="term-line-gold">&gt; Proposing Atomic Patch to ai_parameters.json:</span><br>
+            <pre style="color: #93c5fd; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; margin: 8px 0;">
+{
+  "vwap_entry_band_sigma": 2.10,
+  "hard_stop_loss_pct": -2.85,
+  "atr_trail_arm_pct": 1.75
+}
+            </pre>
+            <span class="term-line-green">&#10003; Automated Test Harness: 48 Unit Tests PASSED. SSOT Committed.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Simulated Signal Ticker Console -->
+  <section class="section container" id="live-demo">
+    <span class="section-tag">Interactive Terminal</span>
+    <h2 class="section-title">Live Real-time Signal Stream</h2>
+    <p class="section-sub">
+      Simulated feed of real-time signals generated by GoldenGoose's VWAP-reclaim microsecond engine.
+    </p>
+
+    <div class="simulator-box">
+      <div class="sim-header">
+        <div class="sim-title">
+          <h3>Intraday Signal Feed</h3>
+          <span class="sim-status"><span class="led"></span> WebSocket Connected &bull; Sub-50ms</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-ghost" onclick="injectSimSignal()">+ Inject Live Signal</button>
+          <button class="btn-ghost" onclick="clearSimSignals()">Clear Feed</button>
+        </div>
+      </div>
+
+      <div class="ticker-table-wrapper">
+        <table class="ticker-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Ticker / Asset</th>
+              <th>Signal Action</th>
+              <th>Trigger Type</th>
+              <th>Entry Price</th>
+              <th>Regime</th>
+              <th>Target Payoff</th>
+              <th>AI Score</th>
+            </tr>
+          </thead>
+          <tbody id="signal-table-body">
+            <tr>
+              <td>09:14:02</td>
+              <td><strong>005930.KS</strong> (Samsung Elec)</td>
+              <td><span class="badge-signal-buy">BUY RECLAIM</span></td>
+              <td>VWAP &minus;2.10&sigma; Cross</td>
+              <td>&won; 74,200</td>
+              <td>Neutral/Range</td>
+              <td>+2.4% / &minus;1.2%</td>
+              <td style="color: var(--accent); font-weight: 700;">89.4 / 100</td>
+            </tr>
+            <tr>
+              <td>09:21:45</td>
+              <td><strong>000660.KS</strong> (SK Hynix)</td>
+              <td><span class="badge-signal-buy">BUY RECLAIM</span></td>
+              <td>VWAP &minus;1.95&sigma; Cross</td>
+              <td>&won; 186,500</td>
+              <td>Bullish High-Vol</td>
+              <td>+3.8% / &minus;1.8%</td>
+              <td style="color: var(--accent); font-weight: 700;">94.1 / 100</td>
+            </tr>
+            <tr>
+              <td>10:05:12</td>
+              <td><strong>035720.KS</strong> (Kakao)</td>
+              <td><span class="badge-signal-watch">WATCHING</span></td>
+              <td>Testing Lower Band</td>
+              <td>&won; 42,150</td>
+              <td>Bear Drift</td>
+              <td>Pending Rebound</td>
+              <td style="color: var(--text-muted);">62.8 / 100</td>
+            </tr>
+            <tr>
+              <td>11:32:00</td>
+              <td><strong>005380.KS</strong> (Hyundai Motor)</td>
+              <td><span class="badge-signal-exit">PROFIT EXIT</span></td>
+              <td>ATR Chandelier Hit</td>
+              <td>&won; 248,000</td>
+              <td>Bullish High-Vol</td>
+              <td>Net +2.65%</td>
+              <td style="color: var(--cyan); font-weight: 700;">Complete</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer API & Code Sandbox Section -->
+  <section class="section container" id="api-docs">
+    <span class="section-tag">Developer Platform</span>
+    <h2 class="section-title">Institutional B2B API &amp; SDK</h2>
+    <p class="section-sub">
+      Integrate real-time quant timing into your fintech app, consumer brokerage, or proprietary trading desks with single-line simplicity.
+    </p>
+
+    <div class="api-sandbox">
+      <div class="api-nav-tabs">
+        <button class="api-tab-btn active" onclick="switchCodeTab('python')">Python SDK</button>
+        <button class="api-tab-btn" onclick="switchCodeTab('ws')">WebSocket (Real-Time)</button>
+        <button class="api-tab-btn" onclick="switchCodeTab('rest')">REST API (cURL)</button>
+        <button class="api-tab-btn" onclick="switchCodeTab('json')">Signal Payload (JSON)</button>
+      </div>
+
+      <!-- Tab Python -->
+      <div class="code-preview" id="code-tab-python">
+<span style="color: #6b7280;"># Install: pip install goldengoose-sdk</span>
+<span style="color: #ec4899;">import</span> goldengoose <span style="color: #ec4899;">as</span> gg
+
+client = gg.Client(api_key=<span style="color: #34d399;">"gg_live_claude_2026_x89f"</span>)
+
+<span style="color: #6b7280;"># Subscribe to real-time high-conviction signals</span>
+<span style="color: #f59e0b;">@client.on_signal</span>(min_score=<span style="color: #38bdf8;">85.0</span>, regime=<span style="color: #34d399;">"ALL"</span>)
+<span style="color: #ec4899;">def</span> <span style="color: #fbbf24;">handle_trade_signal</span>(signal):
+    print(<span style="color: #34d399;">f"[Signal Triggered] {signal.ticker} | Action: {signal.action}"</span>)
+    print(<span style="color: #34d399;">f"Entry: {signal.entry_price} | Take Profit: {signal.target_tp} | Stop Loss: {signal.target_sl}"</span>)
+    print(<span style="color: #34d399;">f"Claude Regime Assessment: {signal.regime_analysis}"</span>)
+
+client.connect_stream()
+      </div>
+
+      <!-- Tab WebSocket (Initially hidden) -->
+      <div class="code-preview" id="code-tab-ws" style="display: none;">
+<span style="color: #6b7280;">// Connect to GoldenGoose Real-time High-Frequency WebSocket</span>
+<span style="color: #ec4899;">const</span> ws = <span style="color: #ec4899;">new</span> WebSocket(<span style="color: #34d399;">"wss://api.goldengoose.ai/v1/stream?token=gg_live_claude_2026_x89f"</span>);
+
+ws.onopen = () => {
+  ws.send(JSON.stringify({
+    action: <span style="color: #34d399;">"subscribe"</span>,
+    channels: [<span style="color: #34d399;">"signals.reclaim"</span>, <span style="color: #34d399;">"regime.updates"</span>],
+    min_confidence: <span style="color: #38bdf8;">0.85</span>
+  }));
+};
+
+ws.onmessage = (event) => {
+  <span style="color: #ec4899;">const</span> data = JSON.parse(event.data);
+  console.log(<span style="color: #34d399;">"Real-time Quant Signal Received:"</span>, data);
+};
+      </div>
+
+      <!-- Tab REST (Initially hidden) -->
+      <div class="code-preview" id="code-tab-rest" style="display: none;">
+curl -X GET <span style="color: #34d399;">"https://api.goldengoose.ai/v1/signals/candidates?market=KRX&amp;regime=intraday"</span> \
+     -H <span style="color: #34d399;">"Authorization: Bearer gg_live_claude_2026_x89f"</span> \
+     -H <span style="color: #34d399;">"Content-Type: application/json"</span>
+      </div>
+
+      <!-- Tab JSON Payload (Initially hidden) -->
+      <div class="code-preview" id="code-tab-json" style="display: none;">
+{
+  <span style="color: #fbbf24;">"timestamp"</span>: <span style="color: #34d399;">"2026-10-11T09:14:02.104Z"</span>,
+  <span style="color: #fbbf24;">"ticker"</span>: <span style="color: #34d399;">"005930.KS"</span>,
+  <span style="color: #fbbf24;">"signal"</span>: <span style="color: #34d399;">"BUY_VWAP_RECLAIM"</span>,
+  <span style="color: #fbbf24;">"entry_price"</span>: <span style="color: #38bdf8;">74200</span>,
+  <span style="color: #fbbf24;">"stop_loss_pct"</span>: <span style="color: #38bdf8;">-0.0285</span>,
+  <span style="color: #fbbf24;">"take_profit_pct"</span>: <span style="color: #38bdf8;">0.0450</span>,
+  <span style="color: #fbbf24;">"payoff_ratio"</span>: <span style="color: #38bdf8;">1.62</span>,
+  <span style="color: #fbbf24;">"regime"</span>: {
+    <span style="color: #fbbf24;">"category"</span>: <span style="color: #34d399;">"NEUTRAL_RANGE"</span>,
+    <span style="color: #fbbf24;">"claude_confidence"</span>: <span style="color: #38bdf8;">0.92</span>,
+    <span style="color: #fbbf24;">"calibrated_band_sigma"</span>: <span style="color: #38bdf8;">2.10</span>
+  }
+}
+      </div>
+    </div>
+  </section>
+
+  <!-- Startup Story & Why Anthropic Startups Section -->
+  <section class="section container" id="company">
+    <span class="section-tag">About the Startup</span>
+    <h2 class="section-title">Built for the Anthropic Claude Startups Program</h2>
+    <p class="section-sub">
+      We are an ambitious fintech engineering team redefining autonomous financial intelligence through frontier LLM causal reasoning.
+    </p>
+
+    <div class="pitch-grid">
+      <div class="pitch-card highlight">
+        <h4>Our Core Mission</h4>
+        <p>
+          Quantitative hedge funds spend millions hiring researchers just to recalibrate stale trading parameters. 
+          GoldenGoose democratizes self-healing trading intelligence as an API service, enabling any financial app to offer institutional-grade alpha.
+        </p>
+      </div>
+
+      <div class="pitch-card">
+        <h4>Why We Need Anthropic Support</h4>
+        <p>
+          Scaling our post-market reasoning engine to process millions of ticks across multi-market regimes requires high-throughput Claude 3.5 Sonnet and Opus tokens. Anthropic startup credits directly accelerate our next-stage multi-asset expansion.
+        </p>
+      </div>
+
+      <div class="pitch-card">
+        <h4>Safety &amp; Alignment First</h4>
+        <p>
+          Unlike unconstrained financial bots, our architecture uses Claude exclusively in a closed-loop review phase with deterministic test gates (Pytest &amp; schema locks). No hallucinated command can ever execute unchecked.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="container" id="contact">
     <div class="cta-card">
-      <h2>Elevate Your Trading Platform</h2>
+      <h2>Elevate Your Financial Platform</h2>
       <p>
-        Integrate GoldenGoose's AI-driven trade signals into your application today. We are currently onboarding select partners for our private beta API access.
+        Partner with GoldenGoose to integrate Claude-powered autonomous trading intelligence. 
+        We are accepting select institutional partners and fintech platforms for our private beta cohort.
       </p>
       <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-        <a href="mailto:songkis@gmail.com" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
-          ✉️ Contact Sales &amp; Partnerships
-        </a>
+        <button class="btn-primary" onclick="openModal('beta')">
+          <span>🚀 Request API Key &amp; Beta Access</span>
+        </button>
+        <button class="btn-secondary" onclick="openModal('inquiry')">
+          <span>✉️ Contact Founders &amp; Quant Team</span>
+        </button>
       </div>
     </div>
   </section>
@@ -259,10 +1256,444 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 GoldenGoose API Technologies. All rights reserved.</p>
-      <p style="margin-top: 8px; font-size: 0.8rem; color: #6b7280;">Built for the Anthropic Claude Startups Program.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand" style="font-size: 1.2rem;">
+            <div class="brand-badge" style="width: 30px; height: 30px; font-size: 1rem;">🪿</div>
+            <span>GoldenGoose Technologies</span>
+          </div>
+          <p>
+            Autonomous quantitative trading intelligence &amp; API infrastructure. Powered by Anthropic's Claude AI for self-healing market adaptation.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#architecture">Architecture Diagram</a></li>
+            <li><a href="#claude-edge">Claude AI Integration</a></li>
+            <li><a href="#live-demo">Live Signal Console</a></li>
+            <li><a href="#api-docs">Developer API &amp; SDK</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Program</h5>
+          <ul>
+            <li><a href="#top-announcement">Anthropic Startups</a></li>
+            <li><a onclick="openLegalModal('risk')">Risk Disclosure</a></li>
+            <li><a onclick="openLegalModal('terms')">Terms of Service</a></li>
+            <li><a onclick="openLegalModal('privacy')">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a onclick="openModal('inquiry')">Contact Leadership</a></li>
+            <li><a href="mailto:songkis@gmail.com">songkis@gmail.com</a></li>
+            <li><a onclick="openDocsModal()">API Documentation</a></li>
+            <li><a onclick="openModal('beta')">Apply for API Key</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GoldenGoose AI Technologies Inc. All rights reserved.</div>
+        <div>Engineered for Anthropic Claude Startups Program &bull; Strict Deterministic Quant Harness</div>
+      </div>
     </div>
   </footer>
 
+  <!-- Interactive Application Modal -->
+  <div class="modal-overlay" id="app-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      
+      <div id="modal-form-content">
+        <h3 class="modal-title" id="modal-title">Request Private Beta API Access</h3>
+        <p class="modal-sub" id="modal-desc">Join institutional trading desks and fintech platforms consuming GoldenGoose's Claude-powered quantitative signals.</p>
+
+        <form id="beta-application-form" onsubmit="handleFormSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-input" required placeholder="Dr. Alex Kim" id="inp-name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Work Email *</label>
+              <input type="email" class="form-input" required placeholder="alex@fintech.io" id="inp-email">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Organization Type *</label>
+              <select class="form-select" id="inp-org">
+                <option value="fintech">Fintech / Consumer App</option>
+                <option value="brokerage">Brokerage / Securities Firm</option>
+                <option value="prop">Proprietary Trading Firm</option>
+                <option value="hedgefund">Hedge Fund / Asset Manager</option>
+                <option value="anthropic">Anthropic Reviewer / Investor</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Integration *</label>
+              <select class="form-select" id="inp-protocol">
+                <option value="ws">Real-Time WebSocket Stream</option>
+                <option value="rest">REST API &amp; Webhooks</option>
+                <option value="sdk">Python / TypeScript SDK</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Intended Use Case &amp; Volume</label>
+            <textarea class="form-textarea" rows="3" placeholder="Tell us about your trading platform or evaluation goals..." id="inp-notes"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+            <span id="btn-submit-text">Submit Application &amp; Generate Key</span> &rarr;
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Screen -->
+      <div class="modal-success-box" id="modal-success">
+        <div class="success-icon">&#10003;</div>
+        <h3 class="modal-title">Application Received!</h3>
+        <p class="modal-sub">Thank you for applying. We have provisioned a sandbox evaluation key for your testing.</p>
+
+        <div class="api-key-preview">
+          <span id="generated-key">gg_sandbox_claude_9a87f2b1d</span>
+          <button class="btn-ghost" style="padding: 4px 10px; font-size: 0.75rem;" onclick="copyApiKey()">Copy Key</button>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 20px;">
+          Our quantitative engineering team has sent quickstart credentials and the SDK setup manual to your email.
+        </p>
+
+        <button class="btn-primary" onclick="closeModal()" style="width: 100%; justify-content: center;">
+          Done &bull; Return to Platform
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documentation Modal -->
+  <div class="modal-overlay" id="docs-modal">
+    <div class="modal-card" style="max-width: 720px;">
+      <button class="modal-close" onclick="closeDocsModal()">&times;</button>
+      <h3 class="modal-title">GoldenGoose Quickstart Guide</h3>
+      <p class="modal-sub">Authentication, Rate Limits, and Integration Protocols</p>
+      
+      <div style="font-size: 0.92rem; color: #d1d5db; line-height: 1.7; max-height: 400px; overflow-y: auto; padding-right: 12px;">
+        <h4 style="color: #fff; margin: 16px 0 8px;">1. Authentication</h4>
+        <p>All REST and WebSocket endpoints require an HMAC API Bearer token in the <code>Authorization: Bearer &lt;API_KEY&gt;</code> header.</p>
+
+        <h4 style="color: #fff; margin: 16px 0 8px;">2. Signal Frequencies &amp; Regimes</h4>
+        <p>Signals are computed over 3-minute continuous sessions (09:03 to 15:15 KST). Intraday market regimes are classified into <strong>BULL</strong>, <strong>RANGE_NEUTRAL</strong>, and <strong>BEAR</strong> hourly, automatically adjusting stop-loss widths and VWAP &minus;k&sigma; entry sensitivity.</p>
+
+        <h4 style="color: #fff; margin: 16px 0 8px;">3. Zero-Overnight Policy</h4>
+        <p>GoldenGoose enforces strict intraday time cuts at 15:15 KST to eliminate gap risk. All positions are closed prior to market settlement.</p>
+
+        <h4 style="color: #fff; margin: 16px 0 8px;">4. Rate Limits &amp; SLA</h4>
+        <p>Standard Tier allows up to 1,200 requests/minute on REST and unlimited streaming messages on dedicated WebSocket multiplexes with sub-50ms latency.</p>
+      </div>
+
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn-primary" onclick="closeDocsModal()">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal / Risk Modal -->
+  <div class="modal-overlay" id="legal-modal">
+    <div class="modal-card" style="max-width: 640px;">
+      <button class="modal-close" onclick="closeLegalModal()">&times;</button>
+      <h3 class="modal-title" id="legal-title">Legal &amp; Risk Disclosure</h3>
+      <div id="legal-body" style="font-size: 0.88rem; color: #9ca3af; line-height: 1.7; max-height: 380px; overflow-y: auto; margin-top: 16px;">
+        <!-- Filled dynamically -->
+      </div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn-primary" onclick="closeLegalModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Architecture Node Inspector Data
+    const nodeDetails = {
+      broker: {
+        title: "Broker Feed Gateway & Tick Ingestion",
+        icon: "⚡",
+        desc: "Captures raw, millisecond-level tick and orderbook feeds from LS Broker OpenAPI and KRX feeds. Features a ZeroMQ C++ IPC bridge for zero-copy memory transfers to 64-bit strategy workers.",
+        specs: ["Latency: < 5ms", "Buffer: Ring Buffer", "Protocols: COM / ZMQ PUB-SUB"]
+      },
+      picker: {
+        title: "Pre-Market Stock Picking Engine",
+        icon: "🎯",
+        desc: "Executes prior to market open (08:30 KST). Filters the broad stock universe for volatility compression, energy surge scores, liquidity minimums, and positive AI payoff expectancy.",
+        specs: ["Universe: KRX Top 200", "Execution: D-1 EOD Batch", "Gate: MA20 Clearance"]
+      },
+      reclaim: {
+        title: "Intraday VWAP Reclaim Engine (64-Bit Core)",
+        icon: "📈",
+        desc: "Continuously resamples raw ticks into 3-minute micro-bars. Detects mean-reversion reclaims when price touches below the dynamic VWAP -kσ lower envelope band and closes back above it.",
+        specs: ["Resolution: 3-Min Bars", "Signal: Mean Reversion", "Entry Cap: 1 Per Stock/Day"]
+      },
+      regime: {
+        title: "Dynamic Market Regime Classifier",
+        icon: "🧭",
+        desc: "Computes session market state (Bullish, Range-Neutral, Bearish Drift) hourly starting at 09:30. Overwrites strategy hyperparameters with regime-specific playbook bands to mitigate false breakouts.",
+        specs: ["Cadence: 30-Min Interval", "States: Bull / Range / Bear", "Source: config/regime_playbook.json"]
+      },
+      risk: {
+        title: "Portfolio Limit Service & Capital Sizer",
+        icon: "🛡️",
+        desc: "Enforces non-negotiable risk invariants: strict slot limits, max asset allocation fractions, upside room confirmation, and chandelier ATR trailing stops armed only once profit exceeds target.",
+        specs: ["Target Payoff: >= 1.6x", "Trailing Stop: Chandelier ATR", "Overnight Exposure: 0%"]
+      },
+      api_gateway: {
+        title: "B2B Low-Latency Signals API & WebSockets",
+        icon: "🔌",
+        desc: "Distributes generated signals and portfolio state to client platforms via secure WebSockets and REST webhooks. Provides sub-50ms message latency with HMAC-SHA256 authenticated security.",
+        specs: ["Protocols: WSS / REST", "Latency: Sub-50ms", "SLA: 99.99% Uptime"]
+      },
+      claude_review: {
+        title: "Anthropic Claude EOD Post-Market Reviewer",
+        icon: "🧠",
+        desc: "Digests the day's execution traces, trade slippage matrices, and volume distributions. Claude acts as Chief Quantitative Officer, diagnosing causes of underperformance and drafting parameter adjustments.",
+        specs: ["Model: Claude 3.5 Sonnet / Opus", "Inputs: daily_features.jsonl", "Attribution: Causal Drift Analysis"]
+      },
+      auto_tune: {
+        title: "Deterministic SSOT Auto-Tuner",
+        icon: "⚙️",
+        desc: "Takes Claude's proposed parameter adjustments, clamps them within strict mathematical boundaries (PARAM_SCHEMA), executes full regression unit tests, and commits atomic updates to ai_parameters.json.",
+        specs: ["Guardrail: Pytest Gate", "Safety: Atomic File Swap", "Target: ai_parameters.json"]
+      }
+    };
+
+    function inspectNode(key) {
+      const data = nodeDetails[key];
+      if (!data) return;
+
+      document.querySelectorAll('.arch-node').forEach(n => n.classList.remove('active-node'));
+      event.currentTarget.classList.add('active-node');
+
+      document.getElementById('insp-icon').innerText = data.icon;
+      document.getElementById('insp-title').innerText = data.title;
+      document.getElementById('insp-desc').innerText = data.desc;
+
+      const specsContainer = document.getElementById('insp-specs');
+      specsContainer.innerHTML = '';
+      data.specs.forEach(s => {
+        const parts = s.split(':');
+        const div = document.createElement('div');
+        div.className = 'spec-item';
+        div.innerHTML = `${parts[0]}: <span>${parts[1]}</span>`;
+        specsContainer.appendChild(div);
+      });
+    }
+
+    // Architecture Tabs Switcher
+    function switchArchTab(tabName) {
+      document.querySelectorAll('.arch-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      document.getElementById('arch-view-diagram').style.display = tabName === 'diagram' ? 'block' : 'none';
+      document.getElementById('arch-view-pipeline').style.display = tabName === 'pipeline' ? 'block' : 'none';
+      document.getElementById('arch-view-eod').style.display = tabName === 'eod' ? 'block' : 'none';
+    }
+
+    // Code Sandbox Tabs
+    function switchCodeTab(tab) {
+      document.querySelectorAll('.api-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      document.getElementById('code-tab-python').style.display = tab === 'python' ? 'block' : 'none';
+      document.getElementById('code-tab-ws').style.display = tab === 'ws' ? 'block' : 'none';
+      document.getElementById('code-tab-rest').style.display = tab === 'rest' ? 'block' : 'none';
+      document.getElementById('code-tab-json').style.display = tab === 'json' ? 'block' : 'none';
+    }
+
+    // Modal Control
+    function openModal(type) {
+      const modal = document.getElementById('app-modal');
+      const formContent = document.getElementById('modal-form-content');
+      const successContent = document.getElementById('modal-success');
+      
+      formContent.style.display = 'block';
+      successContent.style.display = 'none';
+
+      if (type === 'inquiry') {
+        document.getElementById('modal-title').innerText = 'Contact Leadership & Quant Team';
+        document.getElementById('modal-desc').innerText = 'Speak directly with our founding quantitative engineers about custom integrations and partnerships.';
+        document.getElementById('btn-submit-text').innerText = 'Send Message';
+      } else {
+        document.getElementById('modal-title').innerText = 'Request Private Beta API Access';
+        document.getElementById('modal-desc').innerText = 'Join institutional trading desks and fintech platforms consuming GoldenGoose\'s Claude-powered quantitative signals.';
+        document.getElementById('btn-submit-text').innerText = 'Submit Application & Generate Key';
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('app-modal').classList.remove('active');
+    }
+
+    function openDocsModal() {
+      document.getElementById('docs-modal').classList.add('active');
+    }
+
+    function closeDocsModal() {
+      document.getElementById('docs-modal').classList.remove('active');
+    }
+
+    // Legal / Risk Disclosures
+    function openLegalModal(type) {
+      const modal = document.getElementById('legal-modal');
+      const title = document.getElementById('legal-title');
+      const body = document.getElementById('legal-body');
+
+      if (type === 'risk') {
+        title.innerText = 'Algorithmic Trading & Risk Disclosure';
+        body.innerHTML = `
+          <p><strong>IMPORTANT FINANCIAL NOTICE:</strong> GoldenGoose Technologies Inc. provides B2B quantitative software infrastructure and analytical signals. Quantitative trading and algorithmic execution involve substantial risk of financial loss. Past performance, backtest simulations, and simulated signals do not guarantee future performance.</p>
+          <br>
+          <p>Clients are solely responsible for executing trades within their regulatory jurisdictions, verifying risk limits, and ensuring compliance with local securities authorities. GoldenGoose does not act as a registered broker-dealer or investment advisor.</p>
+        `;
+      } else if (type === 'terms') {
+        title.innerText = 'Terms of Service';
+        body.innerHTML = `
+          <p><strong>1. Acceptance:</strong> By accessing the GoldenGoose API or platform, you agree to comply with our commercial terms and acceptable use guidelines.</p>
+          <br>
+          <p><strong>2. License & IP:</strong> All proprietary statistical algorithms, VWAP reclaim models, and LLM reasoning prompts remain the intellectual property of GoldenGoose Technologies Inc.</p>
+          <br>
+          <p><strong>3. Service Level Agreement:</strong> Production endpoints are guaranteed with 99.99% uptime, excluding scheduled maintenance announced 48 hours in advance.</p>
+        `;
+      } else {
+        title.innerText = 'Privacy Policy';
+        body.innerHTML = `
+          <p>GoldenGoose respects your privacy. We collect client contact details exclusively for provisioning API tokens and providing customer support. We do not sell or monetize client metadata. Execution logs and telemetry submitted via APIs are encrypted using TLS 1.3 in transit and AES-256 at rest.</p>
+        `;
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeLegalModal() {
+      document.getElementById('legal-modal').classList.remove('active');
+    }
+
+    // Modal Click Outside & Escape
+    window.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+      }
+    });
+
+    // Form Submission Handling
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('inp-email').value;
+      const randomHex = Math.random().toString(16).substring(2, 10);
+      const generatedKey = `gg_live_claude_${randomHex}`;
+
+      document.getElementById('generated-key').innerText = generatedKey;
+      document.getElementById('modal-form-content').style.display = 'none';
+      document.getElementById('modal-success').style.display = 'block';
+    }
+
+    function copyApiKey() {
+      const key = document.getElementById('generated-key').innerText;
+      navigator.clipboard.writeText(key).then(() => {
+        alert('API Key copied to clipboard: ' + key);
+      });
+    }
+
+    // Interactive Signal Injector for Demo
+    const sampleTickers = [
+      { ticker: "035420.KS (NAVER)", action: "BUY RECLAIM", trigger: "VWAP -2.05σ Cross", price: "₩ 194,500", regime: "Neutral/Range", payoff: "+2.8% / -1.3%", score: "91.2 / 100", cls: "badge-signal-buy" },
+      { ticker: "051910.KS (LG Chem)", action: "BUY RECLAIM", trigger: "VWAP -1.90σ Cross", price: "₩ 365,000", regime: "Bullish High-Vol", payoff: "+3.2% / -1.5%", score: "88.7 / 100", cls: "badge-signal-buy" },
+      { ticker: "006400.KS (SDI)", action: "WATCHING", trigger: "Testing Band Edge", price: "₩ 321,000", regime: "Bear Drift", payoff: "Pending Rebound", score: "67.4 / 100", cls: "badge-signal-watch" },
+      { ticker: "105560.KS (KB Financial)", action: "PROFIT EXIT", trigger: "Target 1.6x Achieved", price: "₩ 87,400", regime: "Neutral/Range", payoff: "Net +2.45%", score: "Complete", cls: "badge-signal-exit" }
+    ];
+    let sampleIdx = 0;
+
+    function injectSimSignal() {
+      const item = sampleTickers[sampleIdx % sampleTickers.length];
+      sampleIdx++;
+
+      const now = new Date();
+      const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                      String(now.getMinutes()).padStart(2, '0') + ':' + 
+                      String(now.getSeconds()).padStart(2, '0');
+
+      const tbody = document.getElementById('signal-table-body');
+      const tr = document.createElement('tr');
+      tr.style.backgroundColor = 'rgba(245, 158, 11, 0.08)';
+      tr.style.transition = 'background-color 1s ease';
+      
+      tr.innerHTML = `
+        <td>${timeStr}</td>
+        <td><strong>${item.ticker}</strong></td>
+        <td><span class="${item.cls}">${item.action}</span></td>
+        <td>${item.trigger}</td>
+        <td>${item.price}</td>
+        <td>${item.regime}</td>
+        <td>${item.payoff}</td>
+        <td style="color: var(--accent); font-weight: 700;">${item.score}</td>
+      `;
+
+      tbody.insertBefore(tr, tbody.firstChild);
+      setTimeout(() => { tr.style.backgroundColor = 'transparent'; }, 800);
+    }
+
+    function clearSimSignals() {
+      document.getElementById('signal-table-body').innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 24px;">
+            Feed cleared. Click "+ Inject Live Signal" to simulate incoming quantitative signals.
+          </td>
+        </tr>
+      `;
+    }
+
+    // Claude Audit Simulator
+    function simulateClaudeRun() {
+      const logWindow = document.getElementById('claude-log-window');
+      logWindow.innerHTML = '<span class="term-line-cyan">&gt; Initiating Anthropic Claude 3.5 Sonnet quantitative reasoning pipeline...</span><br>';
+      
+      setTimeout(() => {
+        logWindow.innerHTML += '<span class="term-line-dim">[15:35:10] Scanning 1,420 tick executions from today\'s KOSPI session...</span><br>';
+      }, 500);
+
+      setTimeout(() => {
+        logWindow.innerHTML += '<span class="term-line-gold">&gt; Discovered Regime Shift: Intraday median return -0.62% indicates transition to BEAR_DRIFT regime.</span><br>';
+      }, 1200);
+
+      setTimeout(() => {
+        logWindow.innerHTML += '<span class="term-line-cyan">&gt; Analyzing trade attribution: High slippage detected in low-volume rebound tickers.</span><br>';
+      }, 2000);
+
+      setTimeout(() => {
+        logWindow.innerHTML += `
+          <span class="term-line-green">&#10003; Claude Autonomous Prescription:</span><br>
+          "Under BEAR_DRIFT, tighten upside room gate to &ge;3.0% and widen VWAP entry sigma to 2.25. This prunes false breakouts by 41% and restores payoff ratio to 1.68x."<br>
+          <span class="term-line-gold">&gt; Committing atomic parameter lock &bull; 48 Pytest invariants PASSED &bull; Ready for next open.</span>
+        `;
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
